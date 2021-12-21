@@ -1,5 +1,10 @@
 # ListPublicRepositoriesWithGithub
 
+**После pull проекта: **
+**1) pod deintegrate**
+**2) pod install**
+**Обязательно!!**
+
 Основная ветка - Develop
 
 **Подходы, используемые в приложении:** 
