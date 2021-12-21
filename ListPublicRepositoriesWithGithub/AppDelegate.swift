@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  ListPublicRepositoriesWithGithub
-//
-//  Created by Данил Гусев on 16.12.2021.
-//
-
 import UIKit
 
 @main

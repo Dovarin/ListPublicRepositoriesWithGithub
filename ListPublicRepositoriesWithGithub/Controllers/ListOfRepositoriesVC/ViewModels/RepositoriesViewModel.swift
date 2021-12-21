@@ -2,7 +2,7 @@ import Foundation
 
 class RepositoriesViewModel: RepositoriesViewModelType {
 
-    let urlString = "https://api.github.com/repositories"
+    private let urlString = "https://api.github.com/repositories"
     
     private var selectedIndexPath: IndexPath?
     
@@ -12,7 +12,7 @@ class RepositoriesViewModel: RepositoriesViewModelType {
         return repositories?.count ?? 0
     }
     
-    func fetchMovies (competion: @escaping() -> ()) {
+    func fetchRepository(competion: @escaping() -> ()) {
         NetworkDataFetch.shared.fetchRepositories(urlString: urlString) { [weak self] (result, error) in
             if error == nil {
                 self?.repositories = result

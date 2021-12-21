@@ -19,8 +19,6 @@ class NetworkRequest {
                 }
                 
                 guard let data = data else { return }
-                let someString = String(data: data, encoding: .utf8)
-                print(someString ?? "No data")
                 completion(.success(data))
             }
         }

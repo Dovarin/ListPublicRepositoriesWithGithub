@@ -15,13 +15,16 @@ class RepositoriesViewCell: UITableViewCell {
     let nameRepositoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
-        
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+
         return label
     }()
     
     let loginLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13)
+        label.textColor = .gray
         
         return label
     }()
@@ -72,26 +75,5 @@ class RepositoriesViewCell: UITableViewCell {
         self.addSubview(profileAvatar)
         self.addSubview(nameRepositoryLabel)
         self.addSubview(loginLabel)
-    }
-    
-    private func setupConstraints() {
-        
-        profileAvatar.snp.makeConstraints {
-            $0.height.width.equalTo(60)
-            $0.centerY.equalTo(self)
-            $0.leading.equalTo(self).inset(15)
-        }
-        
-        nameRepositoryLabel.snp.makeConstraints {
-            $0.top.equalTo(self).offset(10)
-            $0.leading.equalTo(profileAvatar.snp.trailing).offset(10)
-            $0.trailing.equalTo(self).offset(-10)
-        }
-        
-        loginLabel.snp.makeConstraints {
-            $0.top.equalTo(nameRepositoryLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(profileAvatar.snp.trailing).offset(10)
-            $0.trailing.equalTo(self).offset(-10)
-        }
     }
 }

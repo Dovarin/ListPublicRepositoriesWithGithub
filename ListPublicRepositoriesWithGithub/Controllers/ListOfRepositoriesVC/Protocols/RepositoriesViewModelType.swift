@@ -6,7 +6,7 @@ protocol RepositoriesViewModelType {
     
     func cellViewModel(forIndexPath indexPath: IndexPath) -> RepositoriesCellViewModelType?
     
-    func fetchMovies(competion: @escaping() -> ())
+    func fetchRepository(competion: @escaping() -> ())
     
     func viewModelForSelectedRow() -> DetailViewModelType?
     

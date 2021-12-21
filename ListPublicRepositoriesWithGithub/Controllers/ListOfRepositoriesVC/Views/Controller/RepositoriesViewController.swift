@@ -1,14 +1,7 @@
-//
-//  ViewController.swift
-//  ListPublicRepositoriesWithGithub
-//
-//  Created by Данил Гусев on 16.12.2021.
-//
-
 import UIKit
 import SnapKit
 
-class RepositoriesViewController: UIViewController {
+class RepositoriesViewController: UIViewController, BaseInitialProtocol {
     
     let tableRepositories: UITableView = {
         let table = UITableView()
@@ -18,7 +11,7 @@ class RepositoriesViewController: UIViewController {
         return table
     }()
 
-    let vc = DetailViewController()
+    let signTest = GithubApiManager(isSigningIn: false)
     
     var viewModel: RepositoriesViewModelType?
     
@@ -31,10 +24,8 @@ class RepositoriesViewController: UIViewController {
         setupDelegate()
         setupConstraints()
         setupNavigationBar()
-        
-        viewModel?.fetchMovies { [weak self] in
-                self?.tableRepositories.reloadData()
-        }
+        loadData()
+        signTest.signIn()
     }
     
     func setupViews() {
@@ -47,6 +38,13 @@ class RepositoriesViewController: UIViewController {
         tableRepositories.dataSource = self
     }
     
+    func loadData() {
+
+        viewModel?.fetchRepository { [weak self] in
+                self?.tableRepositories.reloadData()
+        }
+    }
+    
     func setupConstraints() {
         
         tableRepositories.snp.makeConstraints {
@@ -54,13 +52,19 @@ class RepositoriesViewController: UIViewController {
         }
     }
     
-    private func setupNavigationBar() {
+    func setupNavigationBar() {
         title = "List of public repositories"
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        navigationController?.pushViewController(vc, animated: true)
+        guard let viewModel = viewModel else {return}
+        viewModel.selectRow(atIndexPath: indexPath)
+        
+        let detailVC = DetailViewController()
+        detailVC.viewModel = viewModel.viewModelForSelectedRow()
+        
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
@@ -84,6 +88,6 @@ extension RepositoriesViewController: UITableViewDataSource {
 
 extension RepositoriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        70
+        80
     }
 }
