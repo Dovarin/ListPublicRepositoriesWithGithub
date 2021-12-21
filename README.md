@@ -1,6 +1,6 @@
 # ListPublicRepositoriesWithGithub
 
-**После pull проекта: **
+После pull проекта:
 **1) pod deintegrate**
 **2) pod install**
 **Обязательно!!**
